@@ -51,11 +51,11 @@ The platform provides real-time results about the responses received from tester
 
 ## Getting Started
 
-To get started with Kaaga, simply visit [url], sign in with your Google. Once you're signed in, you can create and customize your digital questionnaires and deploy them online to testers. As responses come in, you can view real-time results and analyze the data to gain insights.
+To get started with Kaaga, simply visit [kaaga](https://admin-kaaga.vercel.app), sign in with your Google. Once you're signed in, you can create and customize your digital questionnaires and deploy them online to testers. As responses come in, you can view real-time results and analyze the data to gain insights.
 
 ## Support
 
-If you need any help using Kaaga or have any questions, please visit our website or contact us at [sense.kaaga@gmail.com] (mailto:sense.kaaga@gmail.com). We're always ready to help you get the most out of our platform.
+If you need any help using Kaaga or have any questions, please visit our website or contact us at [sense.kaaga@gmail.com](mailto:sense.kaaga@gmail.com). We're always ready to help you get the most out of our platform.
 
 ## License
 
