@@ -24,22 +24,8 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import QRCode from '$lib/UI/QRCode.svelte';
-
-	import { toast } from '$lib/Toaster/toastStore';
 	import { db } from '$lib/firebaseConfig';
-	import {
-		collection,
-		setDoc,
-		query,
-		where,
-		getDocs,
-		doc,
-		getDoc,
-		updateDoc,
-		arrayUnion,
-		arrayRemove
-	} from 'firebase/firestore';
-	import QrCode from '$lib/UI/QRCode.svelte';
+	import { collection, query, where, getDocs } from 'firebase/firestore';
 
 	//Retrieve Function
 	async function getTests() {
