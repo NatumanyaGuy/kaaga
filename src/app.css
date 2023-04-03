@@ -1,0 +1,39 @@
+/* @tailwind base; */
+/* @tailwind components; */
+@tailwind utilities;
+
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+/* Custom css  */
+.pad-right {
+	padding-right: 0px !important;
+}
+
+.ql-align-center {
+	text-align: center !important;
+}
+
+.ql-align-right {
+	text-align: right !important;
+}
+.ql-align-justify {
+	text-justify: auto !important;
+}
