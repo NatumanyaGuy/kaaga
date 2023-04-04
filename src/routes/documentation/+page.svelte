@@ -19,8 +19,8 @@
 	</div>
 </div>
 
-<div class="flex flex-row gap-3">
-	<div class="basis-8/12">
+<div class="flex flex-col-reverse lg:flex-row md:flex-row gap-3">
+	<div class="lg:basis-8/12 md:lg:basis-8/12">
 		{#if selected == 0}
 			<div>
 				<h3>Getting started</h3>
@@ -95,7 +95,7 @@
 		{/if}
 	</div>
 
-	<div class="basis-4/12">
+	<div class="lg:basis-4/12 md:lg:basis-4/12">
 		<TileGroup legend="" bind:selected>
 			<RadioTile value="0" iconDescription="Getting Started"
 				><Flag size={12} class="" /> Getting started</RadioTile

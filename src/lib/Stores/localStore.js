@@ -6,5 +6,6 @@ export const kaaga_user = persisted('kaaga_user', {
 	username: '',
 	useremail: '',
 	photoURL: '',
-	date: ''
+	date: '',
+	tests: '...'
 });

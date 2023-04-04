@@ -40,8 +40,8 @@
 	<h1 class="capitalize">Hello {$kaaga_user.username.split(' ')[1]},</h1>
 </div>
 
-<div class="flex flex-row gap-5">
-	<div class="basis-1/2">
+<div class="flex flex-col lg:flex-row md:flex-row gap-5">
+	<div class="lg:basis-1/2 md:basis-1/2">
 		<p>
 			Kaaga is a digito sensory analysis platform that enables evaluators to create and deploy
 			digital questionnaires online to testers.
@@ -73,13 +73,15 @@
 			</Tile>
 		</div>
 
-		<hr class="mt-10" />
-		<p class="text-center">
-			Copyright. <a href="https://muriro.com" target="_blank">Muriro Inc</a>. 2023
-		</p>
+		<div class="hidden lg:block md:block">
+			<hr class="mt-10" />
+			<p class="text-center ">
+				Copyright. <a href="https://muriro.com" target="_blank">Muriro Inc</a>. 2023
+			</p>
+		</div>
 	</div>
 
-	<div class="basis-1/2">
+	<div class="lg:basis-1/2 md:basis-1/2">
 		<iframe
 			class="w-full mx-auto h-96"
 			title="getting_started"

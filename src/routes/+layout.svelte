@@ -1,7 +1,6 @@
 <script>
 	// @ts-nocheck
 	import '../app.css';
-	// import '../devices.min.css';
 	import 'carbon-components-svelte/css/all.css';
 	import { onMount } from 'svelte';
 	import { kaaga_user } from '$lib/Stores/localStore.js';
@@ -43,6 +42,8 @@
 	import NavBar from '$lib/UI/NavBar.svelte';
 	import GoogleBtn from '$lib/UI/GoogleBtn.svelte';
 	import { fade } from 'svelte/transition';
+	import SocialBtns from '$lib/UI/SocialBtns.svelte';
+	import AppleBtn from '$lib/UI/AppleBtn.svelte';
 
 	//Create new user
 	async function createUser(email, username, photoURL) {
@@ -137,6 +138,8 @@
 				console.log(error);
 			});
 	}
+
+	//Background Auth
 </script>
 
 <Toast />
@@ -152,7 +155,7 @@
 {#if firstLoading}
 	<!-- First Loading to Cover whether Authenticated or not -->
 	<div class="flex flex-row justify-center items-center h-screen">
-		<img src="/favicon.png" class="w-24 h-auto" alt="" />
+		<img src="/favicon.png" class="w-24 h-auto animate-pulse" alt="" />
 	</div>
 {:else if $kaaga_user?.username.length > 0}
 	<div in:fade>
@@ -172,11 +175,51 @@
 	</div>
 {:else}
 	<!-- Sign In page  -->
-	<GoogleBtn
-		on:click={() => {
-			signIn();
-		}}
-	/>
+
+	<div class="flex flex-flex-row gap-2 h-[100vh]">
+		<div
+			class="basis-3/5 background-animate bg-gradient-to-r from-[#6e3bf7] to-[#582ec5] text-white 
+			shadow-lg px-5 py-10 text-center hidden lg:block md:block"
+		>
+			<div class="flex flex-col justify-center items-center h-full max-w-md mx-auto">
+				<img src="/favicon.png" class="w-24 h-auto mx-auto" alt="" />
+				<h4 class="my-3 font-bold text-4xl">Digito Sensory Evaluation.</h4>
+				<p class="text-xl text-justify">
+					Kaaga is helping product developers create and deploy digital questionnaires online.
+					<br />
+					Get real-time responses from testers, gain insights into the sensory properties of your products.
+				</p>
+			</div>
+		</div>
+
+		<div class="basis-full lg:basis-2/5 md:basis-2/5">
+			<div class="flex flex-col justify-center items-center h-[90%]">
+				<img src="/favicon.png" class="w-24 h-auto mx-auto mb-8 lg:hidden md:hidden" alt="" />
+
+				<div class="flex flex-row gap-4">
+					<GoogleBtn
+						on:click={() => {
+							signIn();
+						}}
+					/>
+					<AppleBtn
+						on:click={() => {
+							toast(
+								'Sign in with Apple still under development. \nPlease use your Google Account instead.',
+								'warning'
+							);
+						}}
+					/>
+				</div>
+			</div>
+
+			<hr class="w-3/4 mx-auto" />
+			<p class="text-center font-light">
+				Copyright <a href="https://muriro.com" target="_blank">Muriro</a>, 2023
+			</p>
+		</div>
+	</div>
+
 	<!-- Sign In page end  -->
 {/if}
 
@@ -184,4 +227,24 @@
 {#if loading}
 	<Loading />
 {/if}
+
 <!-- Loading Overlay end  -->
+<style>
+	.background-animate {
+		background-size: 400%;
+
+		-webkit-animation: AnimationName 5s ease infinite;
+		-moz-animation: AnimationName 5s ease infinite;
+		animation: AnimationName 5s ease infinite;
+	}
+
+	@keyframes AnimationName {
+		0%,
+		100% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+	}
+</style>

@@ -8,7 +8,7 @@
 </script>
 
 <div class="p-8">
-	<div class="flex flex-row gap-3 mt-3 ">
+	<div class="flex flex-col lg:flex-row md:flex-row gap-3 mt-3 ">
 		<TextInput light={false} bind:value={title} labelText="" placeholder="Test Title" {disabled} />
 		<TextInput
 			disabled={src == 'modal' ? true : disabled}
