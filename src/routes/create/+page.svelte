@@ -17,6 +17,7 @@
 		NumberInput,
 		ContentSwitcher,
 		OverflowMenu,
+		ToastNotification,
 		OverflowMenuItem,
 		Tag,
 		ClickableTile,
@@ -139,7 +140,7 @@
 	let detailsOpen = false;
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	//On mount show get content modal
+	//On mount check if tests more than 3 for user email
 	onMount(() => {});
 
 	//Check if ID is in use
@@ -191,12 +192,25 @@
 		</div>
 	</div>
 
+	{#if $kaaga_user.tests >= 3}
+		<ToastNotification
+			fullWidth
+			kind="warning-alt"
+			hideCloseButton
+			title="You've exceeded your monthly Test quota!"
+			subtitle="Kaaga is still a work in progress and we can only support up to 3 tests per user per month."
+			caption="Please bare with us as we continue to improve the platform."
+		/>
+		<br />
+	{/if}
+
 	<Tile>
 		<h3>Create a new Test</h3>
 		<Form
 			bind:id={content.id}
 			bind:description={content.description}
 			bind:title={content.title}
+			disabled={$kaaga_user.tests >= 3}
 			src="main"
 		/>
 		<div class="flex flex-row justify-end mt-3">
@@ -462,6 +476,7 @@
 		bind:description={content.description}
 		bind:title={content.title}
 		src="modal"
+		disabled={false}
 	/>
 </Modal>
 

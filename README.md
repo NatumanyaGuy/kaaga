@@ -1,8 +1,19 @@
-# Kaaga
+# Kaaga - Admin
 
-Kaaga (_Rukiga_ for _'smell'_, could not find a translation for sense😜!) is a digital sensory analysis platform that enables evaluators to create and deploy digital questionnaires online to testers.
+Kaaga (_Rukiga_ for _'smell'_, could not find a translation for sense😜!) is a Digito Sensory analysis platform that enables evaluators to create and deploy digital questionnaires online to testers.
 The idea for the platform came from our demand for an easy to use and sustainable way to get feedback on the different food products we've been developing over the years.  
 The platform provides real-time results about the responses received from testers, allowing evaluators to gain insights into the sensory properties of their products.
+
+### **This Repo contains the Administrator Dashboard code, see the [Tester portal](https://github.com/NatumanyaGuy/kaaga-tester)**
+
+## Tech Stack
+
+- Sveltekit
+- Svelte Carbon Components
+- Tailwind CSS
+- Carbon Icons
+- Firebase Firestore
+- Firebase Authentication
 
 ## Features
 
@@ -23,6 +34,7 @@ The platform provides real-time results about the responses received from tester
 - Authentication on Tester Side
 - Conditional Logic (Dynamic Questionnaires)
 - Tester Management
+- LAN Deployment of Tests
 
 ## Benefits so far
 

@@ -25,7 +25,8 @@
 	import { fade } from 'svelte/transition';
 	import QRCode from '$lib/UI/QRCode.svelte';
 	import { db } from '$lib/firebaseConfig';
-	import { collection, query, where, getDocs } from 'firebase/firestore';
+	import { collection, query, where, getDocs, doc, deleteDoc } from 'firebase/firestore';
+	import { toast } from '$lib/Toaster/toastStore';
 
 	//Retrieve Function
 	async function getTests() {
@@ -36,7 +37,9 @@
 		querySnapshot.forEach((doc) => {
 			// doc.data() is never undefined for query doc snapshots
 			// console.log(doc.id, ' => ', doc.data());
-			rows = [...rows, doc.data()];
+			var d = doc.data();
+			d.fireID = doc.id;
+			rows = [...rows, d];
 			return rows;
 		});
 	}
@@ -59,6 +62,27 @@
 	//QR Code
 	let qrOpen = false;
 	let link = 'https://muriro.com';
+
+	//Delete Test
+	let deleteOpen = false;
+	let toDelete;
+
+	//Loop Hole to bypass 3 tests per month
+
+	async function deleteTest(id) {
+		loaded = false;
+		deleteOpen = false;
+
+		await deleteDoc(doc(db, 'tests', id))
+			.then(() => {
+				toast('Deleted!', 'success');
+				data = getTests();
+			})
+			.catch((e) => {
+				console.log(e);
+			});
+		loaded = true;
+	}
 </script>
 
 <svelte:head>
@@ -124,12 +148,25 @@
 			<svelte:fragment slot="cell" let:cell let:row>
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
-						<CopyButton text="https://localhost:5137/{row.id}" feedback="Copied to clipboard" />
+						<div class="flex flex-row justify-center">
+							<CopyButton
+								iconDescription="Copy Test URL"
+								text="https://kaaga.vercel.app/{row.id}"
+								feedback="URL copied to clipboard"
+							/>
+							<CopyButton
+								iconDescription="Copy Test ID"
+								text={row.id}
+								feedback="ID copied to clipboard"
+							/>
+							<!-- <CopyButton text="https://kaaga.vercel.app/{row.id}" feedback="Copied to clipboard" /> -->
+						</div>
+
 						<OverflowMenuItem
 							text="Generate QR Code"
 							on:click={() => {
 								qrOpen = true;
-								link = 'https://localhost:5137/' + row.id;
+								link = 'https://kaaga.vercel.app/' + row.id;
 							}}
 						/>
 
@@ -140,7 +177,15 @@
 						console.log(row.id);
 					}}
 				/> -->
-						<OverflowMenuItem danger text="Delete" />
+						<OverflowMenuItem
+							danger
+							text="Delete"
+							on:click={() => {
+								deleteOpen = true;
+								toDelete = row;
+								console.log(toDelete);
+							}}
+						/>
 					</OverflowMenu>
 				{:else if cell.key === 'responses'}
 					{row.responses.length}
@@ -180,5 +225,26 @@
 >
 	<div class="flex flex-row justify-center">
 		<QRCode codeValue={link} squareSize="200" />
+	</div>
+</Modal>
+
+<!-- Delete Test Modal  -->
+<Modal
+	bind:open={deleteOpen}
+	modalHeading="Delete {toDelete?.title}"
+	primaryButtonText="Confirm & Delete"
+	secondaryButtonText="Close"
+	passiveModal={false}
+	on:click:button--secondary={() => (deleteOpen = false)}
+	on:open
+	on:close
+	on:submit={() => {
+		deleteTest(toDelete?.fireID);
+	}}
+	size="sm"
+>
+	<div class="text-center">
+		<h4 class="font-semibold">Are you sure you want to Delete this Test?</h4>
+		<p class="text-red-500 pad-right">This action cannot be undone</p>
 	</div>
 </Modal>

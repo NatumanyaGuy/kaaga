@@ -25,7 +25,7 @@
 			<div>
 				<h3>Getting started</h3>
 				<p>
-					Kaaga is a digital sensory evaluation service developed and maintained by <a
+					Kaaga is a Digito Sensory evaluation service developed and maintained by <a
 						href="https://www.muriro.com"
 						target="_blank">Muriro Inc</a
 					>. The video below gives a description on how to get started with Kaaga
@@ -34,7 +34,7 @@
 				<iframe
 					class="w-full mx-auto h-96"
 					title="getting_started"
-					src="https://www.youtube.com/embed/tgbNymZ7vqY"
+					src="https://www.youtube.com/embed/N5LJ4-Zm9gs"
 				/>
 			</div>
 		{:else if selected == 1}
@@ -54,7 +54,7 @@
 			<iframe
 				class="w-full mx-auto h-96"
 				title="getting_started"
-				src="https://www.youtube.com/embed/tgbNymZ7vqY"
+				src="https://www.youtube.com/embed/N5LJ4-Zm9gs"
 			/>
 		{:else if selected == 2}
 			<h3>Testers</h3>
@@ -70,7 +70,7 @@
 			<iframe
 				class="w-full mx-auto h-96"
 				title="getting_started"
-				src="https://www.youtube.com/embed/tgbNymZ7vqY"
+				src="https://www.youtube.com/embed/N5LJ4-Zm9gs"
 			/>
 		{:else if selected == 3}
 			<h3>Privacy, Security & Safety</h3>
@@ -81,7 +81,7 @@
 		{:else if selected == 4}
 			<h3>Kaaga</h3>
 			<p>
-				Kaaga - Digital Sensory Evaluation is an open source data collection platform focusing on
+				Kaaga - Digito Sensory Evaluation is an open source data collection platform focusing on
 				sensory science and hedonics of products to promote product development, assist in market
 				research and product sustainance. Kaaga is developed and maintained by <a
 					href="https://www.muriro.com"

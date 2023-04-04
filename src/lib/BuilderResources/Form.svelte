@@ -4,13 +4,14 @@
 	export let id = '';
 	export let description = '';
 	export let src = 'main';
+	export let disabled = false;
 </script>
 
 <div class="p-8">
 	<div class="flex flex-row gap-3 mt-3 ">
-		<TextInput light={false} bind:value={title} labelText="" placeholder="Test Title" />
+		<TextInput light={false} bind:value={title} labelText="" placeholder="Test Title" {disabled} />
 		<TextInput
-			disabled={src == 'modal'}
+			disabled={src == 'modal' ? true : disabled}
 			light={false}
 			on:keyup={() => {
 				id = id.replace(/[^A-Z0-9]+/gi, '-').toLowerCase();
@@ -22,5 +23,11 @@
 		/>
 	</div>
 	<br />
-	<TextArea light={false} bind:value={description} labelText="" placeholder="Test Description" />
+	<TextArea
+		{disabled}
+		light={false}
+		bind:value={description}
+		labelText=""
+		placeholder="Test Description"
+	/>
 </div>

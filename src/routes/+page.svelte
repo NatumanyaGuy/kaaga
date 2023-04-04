@@ -3,8 +3,24 @@
 	// @ts-nocheck
 	import { toast } from '$lib/Toaster/toastStore';
 	import { Tile, Breadcrumb, BreadcrumbItem } from 'carbon-components-svelte';
-	import { Document } from 'carbon-icons-svelte';
+	import { Document, OverflowMenuHorizontal, SendAltFilled } from 'carbon-icons-svelte';
 	import { kaaga_user } from '$lib/Stores/localStore.js';
+	import { db } from '$lib/firebaseConfig.js';
+	import { collection, where, getCountFromServer, query } from 'firebase/firestore';
+	import { onMount } from 'svelte';
+
+	//Count User Tests
+	async function countTests() {
+		const coll = collection(db, 'tests');
+		const q = query(coll, where('creator', '==', $kaaga_user.email));
+		const snapshot = await getCountFromServer(q);
+		// console.log('count: ', snapshot.data().count);
+		return snapshot.data().count;
+	}
+
+	onMount(async () => {
+		$kaaga_user.tests = await countTests();
+	});
 </script>
 
 <svelte:head>
@@ -20,15 +36,16 @@
 	</div>
 </div>
 
-<div class="text-end mb-8">
-	<h1 class="capitalize">Hello {$kaaga_user.username}</h1>
+<div class="text-start mb-8">
+	<h1 class="capitalize">Hello {$kaaga_user.username.split(' ')[1]},</h1>
 </div>
 
 <div class="flex flex-row gap-5">
 	<div class="basis-1/2">
 		<p>
-			Kaaga is a digital data collection platform initailly developed for Sensory Evaluation
-			practice. During development, we pivoted to collection of data from different fields of study.
+			Kaaga is a digito sensory analysis platform that enables evaluators to create and deploy
+			digital questionnaires online to testers.
+			<br />
 			We hope you enjoy using Kaaga. God bless!
 		</p>
 		<div class="grid grid-cols-2 gap-2">
@@ -39,7 +56,7 @@
 					<Document size="32" />
 				</div>
 				<div>
-					<p class="text-end font-light text-3xl">5</p>
+					<p class="text-end font-light text-3xl">{$kaaga_user.tests}</p>
 					<p class="text-end font-semibold text-xl">Tests deployed</p>
 				</div>
 			</Tile>
@@ -47,10 +64,10 @@
 				<div
 					class="h-14 w-14 p-3 rounded-full bx--tile--light items-center flex flex-row justify-center"
 				>
-					<Document size="32" />
+					<SendAltFilled size="32" />
 				</div>
 				<div>
-					<p class="text-end font-light text-3xl">75</p>
+					<p class="text-end font-light text-3xl"><OverflowMenuHorizontal /></p>
 					<p class="text-end font-semibold text-xl">Responses so far</p>
 				</div>
 			</Tile>
@@ -66,7 +83,7 @@
 		<iframe
 			class="w-full mx-auto h-96"
 			title="getting_started"
-			src="https://www.youtube.com/embed/tgbNymZ7vqY"
+			src="https://www.youtube.com/embed/N5LJ4-Zm9gs"
 		/>
 	</div>
 </div>
