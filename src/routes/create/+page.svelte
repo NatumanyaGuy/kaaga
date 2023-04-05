@@ -127,7 +127,7 @@
 				console.log('success');
 				loading = false;
 				home.click();
-				toast('Success. Test published!', 'success');
+				toast(`Success. Test published! \n${$kaaga_user.tests + 1}/3 Tests used`, 'success');
 			})
 			.catch((e) => {
 				console.log(e, 'There was an error!');

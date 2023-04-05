@@ -18,7 +18,8 @@
 		OverflowMenu,
 		OverflowMenuItem,
 		Button,
-		CopyButton
+		CopyButton,
+		Link
 	} from 'carbon-components-svelte';
 	import { kaaga_user } from '$lib/Stores/localStore.js';
 	import { onMount } from 'svelte';
@@ -27,6 +28,7 @@
 	import { db } from '$lib/firebaseConfig';
 	import { collection, query, where, getDocs, doc, deleteDoc } from 'firebase/firestore';
 	import { toast } from '$lib/Toaster/toastStore';
+	import { CopyLink, Share, VirtualColumnKey } from 'carbon-icons-svelte';
 
 	//Retrieve Function
 	async function getTests() {
@@ -149,17 +151,46 @@
 				{#if cell.key === 'overflow'}
 					<OverflowMenu flipped>
 						<div class="flex flex-row justify-center">
-							<CopyButton
+							<Button
 								iconDescription="Copy Test URL"
-								text="https://kaaga.vercel.app/{row.id}"
-								feedback="URL copied to clipboard"
+								kind="ghost"
+								icon={CopyLink}
+								on:click={() => {
+									// Copy the text inside the text field
+									navigator.clipboard.writeText(`https://kaaga.vercel.app/${row.id}`);
+									toast(`URL for ${row.title} copied!`, 'success');
+								}}
 							/>
-							<CopyButton
+
+							<Button
 								iconDescription="Copy Test ID"
-								text={row.id}
-								feedback="ID copied to clipboard"
+								kind="ghost"
+								icon={VirtualColumnKey}
+								on:click={() => {
+									// Copy the text inside the text field
+									navigator.clipboard.writeText(row.id);
+									toast(`ID for ${row.title} copied!`, 'success');
+								}}
 							/>
-							<!-- <CopyButton text="https://kaaga.vercel.app/{row.id}" feedback="Copied to clipboard" /> -->
+							<Button
+								kind="ghost"
+								icon={Share}
+								iconDescription="Share Test"
+								on:click={async () => {
+									const shareData = {
+										title: 'Kaaga',
+										text: row.title,
+										url: `https://kaaga.vercel.app/${row.id}`
+									};
+
+									try {
+										await navigator.share(shareData);
+										console.log('Shared successfully');
+									} catch (err) {
+										console.log(`Error: ${err}`);
+									}
+								}}
+							/>
 						</div>
 
 						<OverflowMenuItem
